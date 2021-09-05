@@ -19,7 +19,7 @@ export const GET_COUNTRY = async (code: string) => {
   return api(url);
 };
 
-export const SEARCH = async (artistId: number, country: string) => {
+export const SEARCH = async (artistId: number, country?: string) => {
   let url = `${BASE_URL}search?artistId=${artistId}&country=${country}`;
   return api(url);
 };

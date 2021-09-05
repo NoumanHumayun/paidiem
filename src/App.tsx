@@ -8,6 +8,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import A from "./components/A";
 import AlbumTable from "./components/AlbumTable";
 import { Album } from "./interfaces/Album";
+import { Country } from "./interfaces/Country";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function App() {
   const classes = useStyles();
   const [artistId, setArtistId] = useState(0);
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState<Country>();
   const [artist, setArtist] = useState<any>();
   const [artistError, setArtistError] = useState(false);
   const [albums, setAlbums] = useState<Album[]>([]);
@@ -52,11 +53,11 @@ function App() {
     }
   };
   const handleCountry = (e: any, val: any) => {
-    setCountry(val.alpha2Code);
+    setCountry(val);
   };
 
   const handleSubmit = () => {
-    SEARCH(artistId, country).then((items) => {
+    SEARCH(artistId, country?.alpha2Code).then((items) => {
       if (items.resultCount) {
         setArtist(items.results.shift());
         formatAlbumData(items.results);
@@ -89,7 +90,7 @@ function App() {
 
       {albums && (
         <main className={classes.root}>
-          <AlbumTable albums={albums} />
+          <AlbumTable albums={albums} currency={country?.currencies[0]} />
         </main>
       )}
     </div>
