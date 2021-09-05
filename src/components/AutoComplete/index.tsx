@@ -32,7 +32,10 @@ export default function AutoComplete(props: Data) {
       id="countries"
       options={countries}
       getOptionLabel={(option) => option.name}
-      onChange={props.onChange}
+      onChange={(event, val) => {
+        setCountry(val);
+        props.onChange();
+      }}
       style={{ width: 300 }}
       renderInput={(params) => (
         <TextField {...params} label="Combo box" variant="outlined" />
