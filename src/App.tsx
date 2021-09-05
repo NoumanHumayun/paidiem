@@ -25,6 +25,7 @@ function App() {
   const [artistId, setArtistId] = useState(0);
   const [country, setCountry] = useState("");
   const [artist, setArtist] = useState<any>();
+  const [artistError, setArtistError] = useState(false);
   const [albums, setAlbums] = useState<Album[]>([]);
 
   const formatAlbumData = (albumData: []) => {
@@ -43,7 +44,12 @@ function App() {
   };
 
   const handleArtist = (e: any) => {
-    setArtistId(e.target.value);
+    if (isNaN(e.target.value)) {
+      setArtistError(true);
+    } else {
+      setArtistId(e.target.value);
+      setArtistError(false);
+    }
   };
   const handleCountry = (e: any, val: any) => {
     setCountry(val.alpha2Code);
@@ -65,7 +71,7 @@ function App() {
           label="Artist Id"
           id="artist"
           type="artist"
-          error={false}
+          error={artistError}
           onChange={handleArtist}
         />
 

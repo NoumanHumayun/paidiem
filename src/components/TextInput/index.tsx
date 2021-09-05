@@ -31,7 +31,6 @@ export default function TextInput(props: InputProps) {
   return (
     <TextField
       className={classes.artist}
-      type="number"
       error={error}
       id={id}
       label={label}
