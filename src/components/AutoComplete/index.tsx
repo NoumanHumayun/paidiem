@@ -34,7 +34,7 @@ export default function AutoComplete(props: Data) {
       getOptionLabel={(option) => option.name}
       onChange={(event, val) => {
         setCountry(val);
-        props.onChange();
+        props.onChange(event, val);
       }}
       style={{ width: 300 }}
       renderInput={(params) => (

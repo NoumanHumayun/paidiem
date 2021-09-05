@@ -22,7 +22,10 @@ interface Data {
 }
 export default function AlbumTable(props: Data) {
   const classes = useStyles();
-  const { currency, albums } = props;
+  let { currency, albums } = props;
+
+  if (!currency)
+    currency = { name: "United States Dollar", code: "USD", symbol: "$" };
   const columns: GridColDef[] = [
     {
       field: "image",
